@@ -21,3 +21,14 @@ export type Comment = {
   createdAt: string,
   comment:string,
 }
+
+export type Post = {
+  slug: string,
+  createdAt: string,
+  title: string,
+  featuredImage: FeaturedImage
+}
+
+export type FeaturedImage= {
+    url: string, 
+}
