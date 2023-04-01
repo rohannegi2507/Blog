@@ -5,7 +5,7 @@ import { Post } from '@/types';
 
 type Props = {
   post: Post,
-  position: string
+  position: string,
 }
 
 const AdjacentPostCard = ({ post, position }:Props) => (

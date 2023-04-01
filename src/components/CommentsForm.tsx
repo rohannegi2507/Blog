@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { submitComment } from '../services';
+type Props = {
+ slug: string
+}
 
-const CommentsForm = ({ slug }) => {
+interface IStorage {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+  removeItem(key: string): void;
+}
+
+type FormData = {name:string|null, email:string|null,comment?:string|null, storeData:any}
+
+const CommentsForm = ({ slug }: Props) => {
   const [error, setError] = useState(false);
-  const [localStorage, setLocalStorage] = useState(null);
+  const [localStorage, setLocalStorage] = useState<IStorage |null>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [formData, setFormData] = useState({ name: null, email: null, comment: null, storeData: false });
+  const [formData, setFormData] = useState<FormData>({ name: null, email: null, comment: null, storeData: false });
 
   useEffect(() => {
-    setLocalStorage(window.localStorage);
-    const initalFormData = {
+    const storage: IStorage = window.localStorage
+    setLocalStorage(storage);
+    const initalFormData: FormData= {
       name: window.localStorage.getItem('name'),
       email: window.localStorage.getItem('email'),
       storeData: window.localStorage.getItem('name') || window.localStorage.getItem('email'),
@@ -17,7 +29,7 @@ const CommentsForm = ({ slug }) => {
     setFormData(initalFormData);
   }, []);
 
-  const onInputChange = (e) => {
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<any>) => {
     const { target } = e;
     if (target.type === 'checkbox') {
       setFormData((prevState) => ({
@@ -46,10 +58,10 @@ const CommentsForm = ({ slug }) => {
       slug,
     };
 
-    if (storeData) {
+    if (storeData && localStorage) {
       localStorage.setItem('name', name);
       localStorage.setItem('email', email);
-    } else {
+    } else if(localStorage){
       localStorage.removeItem('name');
       localStorage.removeItem('email');
     }
@@ -78,11 +90,11 @@ const CommentsForm = ({ slug }) => {
     <div className="bg-white shadow-lg rounded-lg p-8 pb-12 mb-8">
       <h3 className="text-xl mb-8 font-semibold border-b pb-4">Leave a Reply</h3>
       <div className="grid grid-cols-1 gap-4 mb-4">
-        <textarea value={formData.comment} onChange={onInputChange} className="p-4 outline-none w-full rounded-lg h-40 focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700" name="comment" placeholder="Comment" />
+        <textarea value={formData.comment || ''} onChange={onInputChange} className="p-4 outline-none w-full rounded-lg h-40 focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700" name="comment" placeholder="Comment" />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-        <input type="text" value={formData.name} onChange={onInputChange} className="py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700" placeholder="Name" name="name" />
-        <input type="email" value={formData.email} onChange={onInputChange} className="py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700" placeholder="Email" name="email" />
+        <input type="text" value={formData.name || ''} onChange={onInputChange} className="py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700" placeholder="Name" name="name" />
+        <input type="email" value={formData.email || ''} onChange={onInputChange} className="py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700" placeholder="Email" name="email" />
       </div>
       <div className="grid grid-cols-1 gap-4 mb-4">
         <div>

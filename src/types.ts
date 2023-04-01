@@ -9,6 +9,7 @@ export type POST = {
 export type Author = {
     name:string,
     photo:Media,
+    bio:string,
 }
 
 export type Media = {
@@ -26,9 +27,16 @@ export type Post = {
   slug: string,
   createdAt: string,
   title: string,
-  featuredImage: FeaturedImage
+  featuredImage: FeaturedImage,
+  author: Author,
+  excerpt: string,
 }
 
 export type FeaturedImage= {
     url: string, 
+}
+
+export type Category = {
+ slug: string,
+ name: string,
 }

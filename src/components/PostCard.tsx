@@ -2,9 +2,9 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image';
 import moment from 'moment';
-import {POST} from './../types'
+import {Post} from './../types'
 type Props = {
-    post: POST,
+    post: Post,
   }
 const PostCard = ({post}:Props) => {
   return (
