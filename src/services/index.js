@@ -34,9 +34,13 @@ export const getPosts = async () => {
     }
   `;
 
-  const result = await request(graphqlAPI, query);
+  try {
+    const result = await request(graphqlAPI, query);
+    return result.postsConnection.edges;
+    } catch(e) {
+      console.log("Something Went wrong", e)
+    }
 
-  return result.postsConnection.edges;
 };
 
 export const getCategories = async () => {
@@ -201,9 +205,14 @@ export const getFeaturedPosts = async () => {
     }   
   `;
 
+  try {
   const result = await request(graphqlAPI, query);
+    return result.posts
+  } catch(e) {
+    console.log("Something Went wrong", e)
+  }
 
-  return result.posts;
+;
 };
 
 export const submitComment = async (obj) => {

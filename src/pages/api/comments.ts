@@ -9,6 +9,7 @@ const graphqlAPI: string = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT || '';
 
 // export a default function for API route to work
 export default async function asynchandler(req:any, res:any) {
+  console.log("testing-token",process.env.GRAPHCMS_TOKE )
   const graphQLClient = new GraphQLClient((graphqlAPI), {
     headers: {
       authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
@@ -21,12 +22,13 @@ export default async function asynchandler(req:any, res:any) {
     }
   `;
 
-  const result = await graphQLClient.request(query, {
-    name: req.body.name,
-    email: req.body.email,
-    comment: req.body.comment,
-    slug: req.body.slug,
-  });
-
+  try {
+  const result = await graphQLClient.request(query, req.body);
   return res.status(200).send(result);
+  }catch(error){
+    console.error("testing", error)
+    return res.status(500).send(error);
+  }
+
+ 
 }
