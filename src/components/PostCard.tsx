@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image';
 import moment from 'moment';
 import {Post} from './../types'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Button } from '@mui/material';
 
 
