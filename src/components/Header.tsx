@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { getCategories } from '../services';
 import { Category } from '@/types';
-import CreateIcon from '@mui/icons-material/Create';
 
 const Header = () => {
   const [categories, setCategories] = useState([]);
