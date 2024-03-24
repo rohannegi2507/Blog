@@ -9,6 +9,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Montserrat', sans-serif;
+  color:#363737;
   &:before{
     content:'';
     content: "";
@@ -16,7 +17,7 @@ body {
     height: 100vh;
     //background: linear-gradient(to right bottom, #6d327c, #485DA6, #00a1ba, #01b18e, #32b37b);
     // background: #D3D3D3;
-    background-color: #1F2833;
+    background-color: #white;
     //background-image: url("../../public/bg.jpg");
     position: fixed;
     left: 0;
@@ -62,4 +63,20 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.primary-bg-color {
+ color:#FFFFFF;
+}
+
+.secondary-bg-color {
+  background-color: #FF6719;
+}
+
+.primary-text-color {
+  color:#363737;
+}
+
+.secondary-text-color {
+  color: #FF6719;
 }
