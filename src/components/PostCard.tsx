@@ -3,8 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image';
 import moment from 'moment';
 import {Post} from './../types'
-import { Button } from '@mui/material';
-
 
 type Props = {
     post: Post,
